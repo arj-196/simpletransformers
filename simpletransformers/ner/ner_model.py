@@ -1157,7 +1157,7 @@ class NERModel:
         if verbose:
             logger.info(self.results)
 
-        return result, model_outputs, preds_list
+        return result, model_outputs, preds_list, label_map
 
     def evaluate(
         self,
