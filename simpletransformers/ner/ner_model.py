@@ -827,7 +827,7 @@ class NERModel:
                         os.makedirs(output_dir_current, exist_ok=True)
 
                         # Only evaluate when single GPU otherwise metrics may not average well
-                        results, _, _ = self.eval_model(
+                        results, _, _, label_map = self.eval_model(
                             eval_data,
                             verbose=verbose and args.evaluate_during_training_verbose,
                             wandb_log=False,
@@ -977,7 +977,7 @@ class NERModel:
                 self.save_model(output_dir_current, optimizer, scheduler, model=model)
 
             if args.evaluate_during_training and args.evaluate_each_epoch:
-                results, _, _ = self.eval_model(
+                results, _, _, label_map = self.eval_model(
                     eval_data,
                     verbose=verbose and args.evaluate_during_training_verbose,
                     wandb_log=False,
@@ -1317,7 +1317,7 @@ class NERModel:
                 truth, preds, labels=labels_list,
             )
 
-        return results, model_outputs, preds_list
+        return results, model_outputs, preds_list, label_map
 
     def predict(self, to_predict, split_on_space=True):
         """
