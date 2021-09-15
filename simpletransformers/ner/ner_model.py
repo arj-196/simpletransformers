@@ -146,8 +146,8 @@ class NERModel:
             cuda_device (optional): Specific GPU that should be used. Will use the first available GPU by default.
             **kwargs (optional): For providing proxies, force_download, resume_download, cache_dir and other options specific to the 'from_pretrained' implementation where this will be supplied.
         """  # noqa: ignore flake8"
-        print("Using Arj Custom Ner Model")
-        print("Hello from yassine")
+        logger.warning("Using Arj Custom Ner Model")
+        logger.warning("Hello from yassine")
         MODEL_CLASSES = {
             "albert": (AlbertConfig, AlbertForTokenClassification, AlbertTokenizer),
             "auto": (AutoConfig, AutoModelForTokenClassification, AutoTokenizer),
@@ -1144,7 +1144,7 @@ class NERModel:
 
         eval_dataset = self.load_and_cache_examples(eval_data, evaluate=True)
 
-        result, model_outputs, preds_list = self.evaluate(
+        result, model_outputs, preds_list, label_map = self.evaluate(
             eval_dataset,
             output_dir,
             verbose=verbose,
